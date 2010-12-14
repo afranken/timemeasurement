@@ -13,12 +13,6 @@ public class WorkingJetmConnector implements JetmConnector
 {
 	private static final String DEFAULT_POINTNAME = "default";
 
-	/**
-	 * Start einer Messung.
-	 *
-	 * @param pointName Name des zu erstellenden Messpunktes
-	 * @return Messpunkt
-	 */
 	@Override
 	public EtmPoint start(String pointName)
 	{

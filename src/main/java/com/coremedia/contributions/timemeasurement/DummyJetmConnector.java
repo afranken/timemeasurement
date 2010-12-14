@@ -27,11 +27,6 @@ public class DummyJetmConnector implements JetmConnector
 		//do nothing
 	}
 
-	/**
-	 * Gibt einen leeren String zurueck
-	 *
-	 * @return leerer String
-	 */
 	@Override
 	public String getMeasurementResults()
 	{

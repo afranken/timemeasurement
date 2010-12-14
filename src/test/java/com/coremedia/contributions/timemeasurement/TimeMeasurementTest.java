@@ -58,4 +58,32 @@ public class TimeMeasurementTest
 		TimeMeasurement.stop(null);
 	}
 
+	@Test
+	public void testDummyJetmConnector()
+	{
+		//unfortunately, the SystemPropery is ignored because TimeMeasurement is initialized in a static block.
+		//if one test with "timemeasurement.enabled" set to "true" runs before this test, TimeMeasurement will be
+		//initialized with a WorkingJetmConnector and vice versa.
+		System.setProperty("timemeasurement.enabled","false");
+
+		//therefore, I have to manually set it to false, so the DummyJetmConnector is loaded
+		TimeMeasurement.getMBean().setActive(false);
+
+		EtmPoint etmPoint = null;
+		try
+		{
+			etmPoint = TimeMeasurement.start("testDummyJetmConnector");
+			Thread.sleep(500);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			TimeMeasurement.stop(etmPoint);
+			assertTrue(TimeMeasurement.getMeasurementResults().contains("disabled"));
+		}
+	}
+
 }

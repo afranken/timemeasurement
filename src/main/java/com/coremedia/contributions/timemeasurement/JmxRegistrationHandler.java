@@ -3,8 +3,8 @@ package com.coremedia.contributions.timemeasurement;
 import etm.core.configuration.EtmManager;
 import etm.core.jmx.EtmMonitorMBean;
 
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
+import javax.management.*;
+import javax.management.openmbean.OpenDataException;
 import java.lang.management.ManagementFactory;
 
 /**
@@ -38,9 +38,25 @@ public final class JmxRegistrationHandler
 				mBeanServer.registerMBean(new EtmMonitorMBean(EtmManager.getEtmMonitor(), "TimeMeasurement"), monitorName);
 			}
 		}
-		catch (Exception e)
+		catch (MalformedObjectNameException e)
 		{
-			e.printStackTrace();
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (OpenDataException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (NotCompliantMBeanException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (InstanceAlreadyExistsException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (MBeanRegistrationException e)
+		{
+			e.printStackTrace(); //NOSONAR
 		}
 	}
 }

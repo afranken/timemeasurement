@@ -39,10 +39,9 @@ import etm.core.monitor.EtmPoint;
  */
 public final class TimeMeasurement implements TimeMeasurementMBean
 {
-	static JetmConnector measurement;
-
 	private static TimeMeasurement instance = new TimeMeasurement();
 	private boolean active;
+	private static JetmConnector measurement;
 
 	/**
 	 * Private constructor
@@ -53,7 +52,7 @@ public final class TimeMeasurement implements TimeMeasurementMBean
 	}
 
 	/**
-	 * static block initializes the JetmConnector
+	 * static block initializes the Jetm library and the connector
 	 */
 	static
 	{

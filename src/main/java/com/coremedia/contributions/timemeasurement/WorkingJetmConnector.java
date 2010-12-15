@@ -16,12 +16,18 @@ public class WorkingJetmConnector implements JetmConnector
 	@Override
 	public EtmPoint start(String pointName)
 	{
+		EtmPoint etmPoint;
+
 		if (pointName == null || pointName.isEmpty())
 		{
-			pointName = DEFAULT_POINTNAME;
+			etmPoint = EtmManager.getEtmMonitor().createPoint(DEFAULT_POINTNAME);
+		}
+		else
+		{
+			etmPoint = EtmManager.getEtmMonitor().createPoint(pointName);
 		}
 
-		return EtmManager.getEtmMonitor().createPoint(pointName);
+		return etmPoint;
 	}
 
 	@Override

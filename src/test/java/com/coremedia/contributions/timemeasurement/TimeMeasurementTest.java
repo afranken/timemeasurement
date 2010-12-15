@@ -20,6 +20,11 @@ public class TimeMeasurementTest
 		try
 		{
 			etmPoint = TimeMeasurement.start("testWorkingJetmConnector");
+			Thread.sleep(5);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 		finally
 		{
@@ -37,7 +42,7 @@ public class TimeMeasurementTest
 		try
 		{
 			etmPoint = TimeMeasurement.start(null);
-			Thread.sleep(500);
+			Thread.sleep(5);
 		}
 		catch (InterruptedException e)
 		{
@@ -59,6 +64,22 @@ public class TimeMeasurementTest
 	}
 
 	@Test
+	public void testIsActive()
+	{
+		System.setProperty("timemeasurement.enabled","true");
+
+		assertTrue(TimeMeasurement.getMBean().isActive());
+	}
+
+	@Test
+	public void testStdOut()
+	{
+		System.setProperty("timemeasurement.enabled","true");
+
+		TimeMeasurement.toStdOut();
+	}
+
+	@Test
 	public void testDummyJetmConnector()
 	{
 		//unfortunately, the SystemPropery is ignored because TimeMeasurement is initialized in a static block.
@@ -73,7 +94,7 @@ public class TimeMeasurementTest
 		try
 		{
 			etmPoint = TimeMeasurement.start("testDummyJetmConnector");
-			Thread.sleep(500);
+			Thread.sleep(5);
 		}
 		catch (InterruptedException e)
 		{
@@ -82,6 +103,7 @@ public class TimeMeasurementTest
 		finally
 		{
 			TimeMeasurement.stop(etmPoint);
+			TimeMeasurement.toStdOut();
 			assertTrue(TimeMeasurement.getMeasurementResults().contains("disabled"));
 		}
 	}

@@ -12,6 +12,7 @@ import java.lang.management.ManagementFactory;
  */
 public final class JmxRegistrationHandler
 {
+	private static MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 	/**
 	 * Private constructor.
 	 */
@@ -21,19 +22,51 @@ public final class JmxRegistrationHandler
 	}
 
 	/**
-	 * Register MBeans.
+	 * Register TimeMeasurementMBean.
+	 *
 	 * Catches Exception with printStackTrace instead of log output to keep dependencies to a minimum.
 	 */
-	public static void register()
+	public static void registerTimeMeasurementMBean()
 	{
-		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+
 		try
 		{
 			if (mBeanServer != null)
 			{
 				ObjectName timeMeasurementName = new ObjectName("TimeMeasurement:name=TimeMeasurement");
 				mBeanServer.registerMBean(com.coremedia.contributions.timemeasurement.TimeMeasurement.getMBean(), timeMeasurementName);
+			}
+		}
+		catch (MalformedObjectNameException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (NotCompliantMBeanException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (InstanceAlreadyExistsException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+		catch (MBeanRegistrationException e)
+		{
+			e.printStackTrace(); //NOSONAR
+		}
+	}
 
+	/**
+	 * Register EtmMonitorMBean.
+	 *
+	 * Catches Exception with printStackTrace instead of log output to keep dependencies to a minimum.
+	 */
+	public static void registerEtmMonitorMBean()
+	{
+
+		try
+		{
+			if (mBeanServer != null)
+			{
 				ObjectName monitorName = new ObjectName("TimeMeasurement:service=PerformanceMonitor");
 				mBeanServer.registerMBean(new EtmMonitorMBean(EtmManager.getEtmMonitor(), "TimeMeasurement"), monitorName);
 			}

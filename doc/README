@@ -1,0 +1,136 @@
+{{{
+#!NewsFlash
+== maintainer information ==
+||name||email adress||
+||Arne Franken||arne.franken@coremedia.com||
+
+== projects using this contribution ==
+||projectname||contact||
+|| BILD || Arne Franken ||
+
+== technical links ==
+ * [https://contributions.coremedia.com/hudson/job/TimeMeasurement/ continuous integration]
+ * [https://contributions.coremedia.com/svn-shared/timemeasurement/trunk/ SVN]
+ * [https://contributions.coremedia.com/mailman/listinfo/timemeasurement/ mailing list]
+}}}
+
+= TimeMeasurement =
+
+== WHAT IT IS ==
+
+!TimeMeasurement is an easy to use wrapper for the !JETM !TimeMeasurement library.
+
+The measurement is only invoked if the Java !SystemProperty "timemeasurement.enable" is set to true, otherwise all
+measurement points in the code are ignored.
+
+== HOW IT WORKS ==
+
+!TimeMeasurement provides static wrapper methods that delegate to the !JETM !TimeMeasurement library if the system property is set to true.
+!TimeMeasurement also registers two !MBeans which provide easy access to the class itself (to stop measurement) and to the measurement results.
+
+This example code shows how to use the class:
+
+{{{
+	EtmPoint etmPoint = null;
+	try
+	{
+		etmPoint = TimeMeasurement.start("measurementPointName");
+		//do something
+	}
+	finally
+	{
+		TimeMeasurement.stop(etmPoint);
+	}
+}}}
+
+Remember to always stop the !EtmPoint in a finally block. If an exception occurs in your code, the point will probably never be stopped otherwise.
+
+As a convenience, the !TimeMeasurement class provides two ways to get the measurement results without using !JMX:
+
+!TimeMeasurement.toStdOut()
+prints the formatted results to standard out.
+
+!TimeMeasurement.getMeasurementResults()
+returns the formatted results as a String.
+
+== ASPECTJ ==
+
+This contribution also provides a simple !AspectJ integration for measuring methods.
+If your module depends on the needed contribution-modules, you simply have to annotate the method you want to measure:
+
+{{{
+	@Measure("measurementPointName")
+	measureMethod()
+	{
+		//do something
+	}
+}}}
+
+== MAVEN CONFIGURATION ==
+
+The Contribution consists of three separate Artifacts:
+
+ * timemeasurement-core
+contains the !TimeMeasurement class, !JMX registration and the dependency to the !JETM library.
+ * timemeasurement-annotation
+contains the AspectJ annotation.
+ * timemeasurement-aspect
+contains the AspectJ aspect that wraps around annotated methods.
+
+== CONFIGURATION EXAMPLES: ==
+
+Your main pom.xml:
+
+{{{
+<properties>
+	<timemeasurement.version>1.0</timemeasurement.version>
+</properties>
+
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>com.coremedia.contribution.timemeasurement</groupId>
+			<artifactId>timemeasurement-core</artifactId>
+			<version>${timemeasurement.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.coremedia.contribution.timemeasurement</groupId>
+			<artifactId>timemeasurement-annotation</artifactId>
+			<version>${timemeasurement.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.coremedia.contribution.timemeasurement</groupId>
+			<artifactId>timemeasurement-aspect</artifactId>
+			<version>${timemeasurement.version}</version>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+}}}
+
+Your !Module pom.xml:
+{{{
+<dependencies>
+	<dependency>
+		<groupId>com.coremedia.contribution.timemeasurement</groupId>
+		<artifactId>timemeasurement-core</artifactId>
+	</dependency>
+</dependencies>
+}}}
+
+If you want to use the AspectJ annotation:
+{{{
+<dependencies>
+	<dependency>
+		<groupId>com.coremedia.contribution.timemeasurement</groupId>
+		<artifactId>timemeasurement-core</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.coremedia.contribution.timemeasurement</groupId>
+		<artifactId>timemeasurement-annotation</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.coremedia.contribution.timemeasurement</groupId>
+		<artifactId>timemeasurement-aspect</artifactId>
+	</dependency>
+</dependencies>
+}}}

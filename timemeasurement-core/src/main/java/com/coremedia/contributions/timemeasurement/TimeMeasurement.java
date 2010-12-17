@@ -56,6 +56,7 @@ public final class TimeMeasurement implements TimeMeasurementMBean
 	 */
 	static
 	{
+		JmxRegistrationHandler.registerTimeMeasurementMBean();
 		chooseJetmConnector(isMeasurementEnabled());
 		initializeJetmLibrary(isMeasurementEnabled());
 	}
@@ -158,8 +159,8 @@ public final class TimeMeasurement implements TimeMeasurementMBean
 		if (isMeasurementEnabled)
 		{
 			BasicEtmConfigurator.configure();
-			JmxRegistrationHandler.register();
 			EtmManager.getEtmMonitor().start();
+			JmxRegistrationHandler.registerEtmMonitorMBean();
 		}
 	}
 }

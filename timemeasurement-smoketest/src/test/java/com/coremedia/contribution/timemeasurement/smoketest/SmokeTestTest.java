@@ -2,33 +2,27 @@ package com.coremedia.contribution.timemeasurement.smoketest;
 
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import com.coremedia.contributions.timemeasurement.TimeMeasurement;
+import org.junit.Test;
 
-public class SmokeTest
+public class SmokeTestTest
 {
-	public static void main(String[] args)
+	@Test
+	public void testTest()
 	{
 		System.setProperty("timemeasurement.enabled","true");
 
-		try
-		{
-			Thread.sleep(50);
-			System.out.println("main.Thread.sleep()");
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-		testAnnotation();
+		consumeTime();
+
 		TimeMeasurement.toStdOut();
+		//assertTrue(TimeMeasurement.getMeasurementResults().contains("consumeTime"));
 	}
 
-	@Measure("testAnnotation")
-	public static void testAnnotation()
+	@Measure("consumeTime")
+	public void consumeTime()
 	{
 		try
 		{
-			Thread.sleep(50);
-			System.out.println("testAnnotation.Thread.sleep()");
+			Thread.sleep(100);
 		}
 		catch (InterruptedException e)
 		{

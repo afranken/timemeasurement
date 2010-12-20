@@ -15,20 +15,4 @@
 	<name>Time Measurement - Annotations</name>
 	<description>Annotations you can add to methods.</description>
 
-	<build>
-		<finalName>timemeasurement-annotations</finalName>
-
-		<plugins>
-			<!-- Compile with java version 6 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>

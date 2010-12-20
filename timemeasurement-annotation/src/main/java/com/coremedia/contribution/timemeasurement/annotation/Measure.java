@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  *
  * <p> In order to measure the method, the annotated
  * bytecode must be weaved with the aspect
- * {@link com.coremedia.contribution.timemeasurement.aspects.MeasureForAspect}.
+ * {@link com.coremedia.contribution.timemeasurement.aspect.MeasureForAspect}.
  * </p>
  * @author afranken (c) 2010
  */

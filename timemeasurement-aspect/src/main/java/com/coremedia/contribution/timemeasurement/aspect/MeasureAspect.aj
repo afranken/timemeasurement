@@ -1,10 +1,10 @@
-package com.coremedia.contribution.timemeasurement.aspects;
+package com.coremedia.contribution.timemeasurement.aspect;
 
 import com.coremedia.contributions.timemeasurement.TimeMeasurement;
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import etm.core.monitor.EtmPoint;
 
-public aspect MeasureForAspect
+public aspect MeasureAspect
 {
 	pointcut hasMeasureAnnotation(Measure measure) : execution(@Measure * * (..)) && @annotation(measure);
 

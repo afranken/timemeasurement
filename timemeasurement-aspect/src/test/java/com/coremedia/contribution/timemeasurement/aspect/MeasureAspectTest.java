@@ -1,7 +1,7 @@
 package com.coremedia.contribution.timemeasurement.aspect;
 
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
-import com.coremedia.contributions.timemeasurement.TimeMeasurement;
+import com.coremedia.contribution.timemeasurement.TimeMeasurement;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

@@ -1,6 +1,6 @@
 package com.coremedia.contribution.timemeasurement.aspect;
 
-import com.coremedia.contributions.timemeasurement.TimeMeasurement;
+import com.coremedia.contribution.timemeasurement.TimeMeasurement;
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import etm.core.monitor.EtmPoint;
 

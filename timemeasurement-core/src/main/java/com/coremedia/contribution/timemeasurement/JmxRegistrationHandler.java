@@ -1,4 +1,4 @@
-package com.coremedia.contributions.timemeasurement;
+package com.coremedia.contribution.timemeasurement;
 
 import etm.core.configuration.EtmManager;
 import etm.core.jmx.EtmMonitorMBean;
@@ -34,7 +34,7 @@ public final class JmxRegistrationHandler
 			if (mBeanServer != null)
 			{
 				ObjectName timeMeasurementName = new ObjectName("TimeMeasurement:name=TimeMeasurement");
-				mBeanServer.registerMBean(com.coremedia.contributions.timemeasurement.TimeMeasurement.getMBean(), timeMeasurementName);
+				mBeanServer.registerMBean(com.coremedia.contribution.timemeasurement.TimeMeasurement.getMBean(), timeMeasurementName);
 			}
 		}
 		catch (MalformedObjectNameException e)

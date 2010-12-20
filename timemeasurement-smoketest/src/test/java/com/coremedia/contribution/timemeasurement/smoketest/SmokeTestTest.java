@@ -1,7 +1,7 @@
 package com.coremedia.contribution.timemeasurement.smoketest;
 
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
-import com.coremedia.contributions.timemeasurement.TimeMeasurement;
+import com.coremedia.contribution.timemeasurement.TimeMeasurement;
 import org.junit.Test;
 
 public class SmokeTestTest

@@ -1,4 +1,4 @@
-package com.coremedia.contributions.timemeasurement;
+package com.coremedia.contribution.timemeasurement;
 
 /**
  * Interface for the TimeMeasurement MBean

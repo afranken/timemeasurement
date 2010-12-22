@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>timemeasurement-annotations</artifactId>
+	<artifactId>timemeasurement-annotation</artifactId>
 	<packaging>jar</packaging>
 
 	<name>Time Measurement - Annotations</name>

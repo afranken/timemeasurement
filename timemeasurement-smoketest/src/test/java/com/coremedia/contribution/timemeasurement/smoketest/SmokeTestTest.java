@@ -1,8 +1,10 @@
 package com.coremedia.contribution.timemeasurement.smoketest;
 
-import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import com.coremedia.contribution.timemeasurement.TimeMeasurement;
+import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class SmokeTestTest
 {
@@ -14,7 +16,7 @@ public class SmokeTestTest
 		consumeTime();
 
 		TimeMeasurement.toStdOut();
-		//assertTrue(TimeMeasurement.getMeasurementResults().contains("consumeTime"));
+		assertTrue(TimeMeasurement.getMeasurementResults().contains("consumeTime"));
 	}
 
 	@Measure("consumeTime")

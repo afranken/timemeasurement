@@ -47,7 +47,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>timemeasurement-annotations</artifactId>
+			<artifactId>timemeasurement-annotation</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

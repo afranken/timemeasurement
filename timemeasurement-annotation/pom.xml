@@ -12,7 +12,7 @@
 	<artifactId>timemeasurement-annotation</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Time Measurement - Annotations</name>
+	<name>Time Measurement - Annotation</name>
 	<description>Annotations you can add to methods.</description>
 
 </project>

@@ -18,15 +18,15 @@
 
 == WHAT IT IS ==
 
-!TimeMeasurement is an easy to use wrapper for the !JETM !TimeMeasurement library.
+!TimeMeasurement is an easy to use wrapper for the JETM !TimeMeasurement library.
 
 The measurement is only invoked if the Java !SystemProperty "timemeasurement.enable" is set to true, otherwise all
 measurement points in the code are ignored.
 
 == HOW IT WORKS ==
 
-!TimeMeasurement provides static wrapper methods that delegate to the !JETM !TimeMeasurement library if the system property is set to true.
-!TimeMeasurement also registers two !MBeans which provide easy access to the class itself (to stop measurement) and to the measurement results.
+!TimeMeasurement provides static wrapper methods that delegate to the JETM !TimeMeasurement library if the system property is set to true.
+!TimeMeasurement also registers two MBeans which provide easy access to the class itself (to stop measurement) and to the measurement results.
 
 This example code shows how to use the class:
 
@@ -45,7 +45,7 @@ This example code shows how to use the class:
 
 Remember to always stop the !EtmPoint in a finally block. If an exception occurs in your code, the point will probably never be stopped otherwise.
 
-As a convenience, the !TimeMeasurement class provides two ways to get the measurement results without using !JMX:
+As a convenience, the !TimeMeasurement class provides two ways to get the measurement results without using JMX:
 
 !TimeMeasurement.toStdOut()
 prints the formatted results to standard out.
@@ -55,7 +55,7 @@ returns the formatted results as a String.
 
 == ASPECTJ ==
 
-This contribution also provides a simple !AspectJ integration for measuring methods.
+This contribution also provides a simple AspectJ integration for measuring methods.
 If your module depends on the needed contribution-modules, you simply have to annotate the method you want to measure:
 
 {{{
@@ -71,7 +71,7 @@ If your module depends on the needed contribution-modules, you simply have to an
 The Contribution consists of three separate Artifacts:
 
  * timemeasurement-core
-contains the !TimeMeasurement class, !JMX registration and the dependency to the !JETM library.
+contains the !TimeMeasurement class, JMX registration and the dependency to the JETM library.
  * timemeasurement-annotation
 contains the AspectJ annotation.
  * timemeasurement-aspect
@@ -107,7 +107,7 @@ Your main pom.xml:
 </dependencyManagement>
 }}}
 
-Your !Module pom.xml:
+Your Module pom.xml:
 {{{
 <dependencies>
 	<dependency>
@@ -119,6 +119,35 @@ Your !Module pom.xml:
 
 If you want to use the AspectJ annotation:
 {{{
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>aspectj-maven-plugin</artifactId>
+			<version>1.3</version>
+			<configuration>
+				<complianceLevel>1.6</complianceLevel>
+				<source>1.6</source>
+				<target>1.6</target>
+				<aspectLibraries>
+					<aspectLibrary>
+						<groupId>com.coremedia.contribution.timemeasurement</groupId>
+						<artifactId>timemeasurement-aspect</artifactId>
+					</aspectLibrary>
+				</aspectLibraries>
+			</configuration>
+			<executions>
+				<execution>
+					<goals>
+						<goal>compile</goal>
+						<goal>test-compile</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
+
 <dependencies>
 	<dependency>
 		<groupId>com.coremedia.contribution.timemeasurement</groupId>

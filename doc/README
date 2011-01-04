@@ -56,7 +56,9 @@ returns the formatted results as a String.
 == ASPECTJ ==
 
 This contribution also provides a simple AspectJ integration for measuring methods.
-If your module depends on the needed contribution-modules, you simply have to annotate the method you want to measure:
+To use AspectJ, you have to depend on the needed contribution-modules and compile your code using the "aspectj-maven-plugin".
+
+Then you can simply annotate the method you want to measure:
 
 {{{
 	@Measure("measurementPointName")
@@ -68,14 +70,16 @@ If your module depends on the needed contribution-modules, you simply have to an
 
 == MAVEN CONFIGURATION ==
 
-The Contribution consists of three separate Artifacts:
+The Contribution consists of four separate Artifacts:
 
  * timemeasurement-core
-contains the !TimeMeasurement class, JMX registration and the dependency to the JETM library.
+contains the !TimeMeasurement class, JMX registration and the dependency to the JETM library. You'll need this artifact if you want to use the contribution at all.
  * timemeasurement-annotation
-contains the AspectJ annotation.
+contains the AspectJ annotation. You only need the artifact if you want to use the AspectJ integration.
  * timemeasurement-aspect
-contains the AspectJ aspect that wraps around annotated methods.
+contains the AspectJ aspect that wraps around annotated methods. You only need the artifact if you want to use the AspectJ integration.
+ * timemeasurement-smoketest
+contains a smoke test which illustrates how the contribution can be used.
 
 == CONFIGURATION EXAMPLES: ==
 

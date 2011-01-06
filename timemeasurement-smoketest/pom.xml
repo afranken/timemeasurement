@@ -33,11 +33,18 @@
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<goals>
-							<goal>compile</goal>
-							<goal>test-compile</goal>
+							<goal>compile</goal> <!-- use this goal to weave all your main classes -->
+							<goal>test-compile</goal> <!-- use this goal to weave all your test classes -->
 						</goals>
 					</execution>
 				</executions>

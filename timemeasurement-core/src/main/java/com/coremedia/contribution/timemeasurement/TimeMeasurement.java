@@ -9,9 +9,11 @@ import etm.core.monitor.EtmPoint;
  *
  * Usage:
  * Configure the module "timemeasurement" as a dependency in Maven.
- * The measurement will work if the Java SystemProperty "timemeasurement.enabled" is set to "true".
+ * The measurement will work if the Java SystemProperty "timemeasurement.enabled" is set to "true"
+ * or enabled via the JMX Bean "TimeMeasurement:name=TimeMeasurement".
  * Otherwise, the calls to this class will do nothing.
- * That way, you won't have to remove the calls from your production code if you don't want to.
+ * That way, you won't have to remove the calls from your production code if you don't want to and you can also
+ * enable time measurement in a production environment via JMX.
  *
  * This is an example on how to measure time in your code:
  *
@@ -41,6 +43,7 @@ public final class TimeMeasurement implements TimeMeasurementMBean
 {
 	private static TimeMeasurement instance = new TimeMeasurement();
 	private boolean active;
+	private static boolean performanceMBeanCreated;
 	private static JetmConnector measurement;
 
 	/**
@@ -56,9 +59,9 @@ public final class TimeMeasurement implements TimeMeasurementMBean
 	 */
 	static
 	{
-		JmxRegistrationHandler.registerTimeMeasurementMBean();
+		BasicEtmConfigurator.configure();
+    JmxRegistrationHandler.registerTimeMeasurementMBean();
 		chooseJetmConnector(isMeasurementEnabled());
-		initializeJetmLibrary(isMeasurementEnabled());
 	}
 
 	/**
@@ -136,31 +139,24 @@ public final class TimeMeasurement implements TimeMeasurementMBean
 
 	/**
 	 * Returns a WorkingJetmConnector if measurement is enabled, a dummy otherwise
-	 *
+	 * Starts or stops the {@link etm.core.configuration.EtmManager#getEtmMonitor()} as necessary.
+   * 
 	 * @param isMeasurementEnabled if true, measurement will take place
 	 */
 	private static void chooseJetmConnector(final boolean isMeasurementEnabled)
 	{
 		if (isMeasurementEnabled)
 		{
-			measurement = new WorkingJetmConnector();
+      measurement = new WorkingJetmConnector();
+      EtmManager.getEtmMonitor().start();
+      if (!performanceMBeanCreated) {
+        JmxRegistrationHandler.registerEtmMonitorMBean();
+        performanceMBeanCreated = true;
+      }
 		} else {
+      EtmManager.getEtmMonitor().stop();
 			measurement = new DummyJetmConnector();
 		}
 	}
 
-	/**
-	 * Initialize and configure JETM library, register JMX-Beans.
-	 *
-	 * @param isMeasurementEnabled if true, JETM will be initialized
-	 */
-	private static void initializeJetmLibrary(final boolean isMeasurementEnabled)
-	{
-		if (isMeasurementEnabled)
-		{
-			BasicEtmConfigurator.configure();
-			EtmManager.getEtmMonitor().start();
-			JmxRegistrationHandler.registerEtmMonitorMBean();
-		}
-	}
 }

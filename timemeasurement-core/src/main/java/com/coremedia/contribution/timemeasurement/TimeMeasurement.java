@@ -154,7 +154,9 @@ public final class TimeMeasurement implements TimeMeasurementMBean
         performanceMBeanCreated = true;
       }
 		} else {
-      EtmManager.getEtmMonitor().stop();
+      if (EtmManager.getEtmMonitor().isStarted()) {
+        EtmManager.getEtmMonitor().stop();
+      }
 			measurement = new DummyJetmConnector();
 		}
 	}

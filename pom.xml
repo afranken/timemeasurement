@@ -1,159 +1,162 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.coremedia.contribution.timemeasurement</groupId>
-	<artifactId>timemeasurement</artifactId>
-	<packaging>pom</packaging>
-	<version>1.4-SNAPSHOT</version>
+  <groupId>com.coremedia.contribution.timemeasurement</groupId>
+  <artifactId>timemeasurement</artifactId>
+  <packaging>pom</packaging>
+  <version>1.4-SNAPSHOT</version>
 
-	<name>TimeMeasurement</name>
-	<description>A wrapper for the JETM time measurement library</description>
+  <name>TimeMeasurement</name>
+  <description>A wrapper for the JETM time measurement library</description>
 
-	<distributionManagement>
-		<repository>
-			<id>coremedia-contributions-releases</id>
-			<name>Contributions Deployment to Contributions Repository</name>
-			<url>https://repository.coremedia.com/nexus/content/repositories/contributions-releases/</url>
-		</repository>
-	</distributionManagement>
+  <distributionManagement>
+    <repository>
+      <id>coremedia-contributions-releases</id>
+      <name>Contributions Deployment to Contributions Repository</name>
+      <url>https://repository.coremedia.com/nexus/content/repositories/contributions-releases/</url>
+    </repository>
+  </distributionManagement>
 
-	<organization>
-		<name>CoreMedia</name>
-		<url>http://coremedia.com</url>
-	</organization>
+  <organization>
+    <name>CoreMedia</name>
+    <url>http://coremedia.com</url>
+  </organization>
 
-	<developers>
-		<developer>
-			<id>afranken</id>
-			<name>Arne Franken</name>
-			<email>arne.franken@coremedia.com</email>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <id>afranken</id>
+      <name>Arne Franken</name>
+      <email>arne.franken@coremedia.com</email>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
 
-	<licenses>
-		<license>
-			<name>CoreMedia Open Source License</name>
-			<url>https://contributions.coremedia.com/admin/wiki/License</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>CoreMedia Open Source License</name>
+      <url>https://contributions.coremedia.com/admin/wiki/License</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-	<scm>
-		<connection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/trunk
-		</connection>
-		<developerConnection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/trunk
-		</developerConnection>
-		<url>https://contributions.coremedia.com/svn-shared/timemeasurement/trunk</url>
-	</scm>
+  <scm>
+    <connection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/trunk
+    </connection>
+    <developerConnection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/trunk
+    </developerConnection>
+    <url>https://contributions.coremedia.com/svn-shared/timemeasurement/trunk</url>
+  </scm>
 
-	<modules>
-		<module>timemeasurement-core</module>
-		<module>timemeasurement-annotation</module>
-		<module>timemeasurement-aspect</module>
-		<module>timemeasurement-smoketest</module>
-	</modules>
+  <modules>
+    <module>timemeasurement-core</module>
+    <module>timemeasurement-annotation</module>
+    <module>timemeasurement-aspect</module>
+    <module>timemeasurement-smoketest</module>
+  </modules>
 
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<aspectj.version>1.6.7</aspectj.version>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <aspectj.version>1.6.7</aspectj.version>
+  </properties>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>aspectj-maven-plugin</artifactId>
-					<configuration>
-						<complianceLevel>1.6</complianceLevel>
-						<source>1.6</source>
-						<target>1.6</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.aspectj</groupId>
-							<artifactId>aspectjtools</artifactId>
-							<version>${aspectj.version}</version>
-						</dependency>
-					</dependencies>
-					<executions>
-						<execution>
-							<goals>
-                            	<goal>compile</goal> <!-- use this goal to weave all your main classes -->
-                            	<goal>test-compile</goal> <!-- use this goal to weave all your test classes -->
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>aspectj-maven-plugin</artifactId>
+          <configuration>
+            <complianceLevel>1.6</complianceLevel>
+            <source>1.6</source>
+            <target>1.6</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.aspectj</groupId>
+              <artifactId>aspectjtools</artifactId>
+              <version>${aspectj.version}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <!-- use this goal to weave all your main classes -->
+                <goal>test-compile</goal>
+                <!-- use this goal to weave all your test classes -->
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>fm.void.jetm</groupId>
-				<artifactId>jetm</artifactId>
-				<version>1.2.3</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.4</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjrt</artifactId>
-				<version>${aspectj.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjtools</artifactId>
-				<version>${aspectj.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>timemeasurement-annotation</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>timemeasurement-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>timemeasurement-aspect</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>fm.void.jetm</groupId>
+        <artifactId>jetm</artifactId>
+        <version>1.2.3</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.4</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjtools</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>timemeasurement-annotation</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>timemeasurement-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>timemeasurement-aspect</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-all</artifactId>
         <version>1.8.5</version>
       </dependency>
-		</dependencies>
-	</dependencyManagement>
+    </dependencies>
+  </dependencyManagement>
 
-	<repositories>
-		<repository>
-			<id>coremedia.com</id>
-			<name>CMS Releases</name>
-			<url>https://repository.coremedia.com/nexus/content/repositories/cms-releases/</url>
-		</repository>
-	</repositories>
+  <repositories>
+    <repository>
+      <id>coremedia.com</id>
+      <name>CMS Releases</name>
+      <url>https://repository.coremedia.com/nexus/content/repositories/cms-releases/</url>
+    </repository>
+  </repositories>
 
 </project>

@@ -114,13 +114,13 @@ public class TimeMeasurementTest extends TestCase {
       //although most systems, Thread.sleep(millis,nanos) does not work (Thread sleeps only for given milliseconds),
       //it's extremly unlikely that this thread would sleep exactly 5 milliseconds.
       //if measured in nanoseconds, it's sleeping ~5100
-      Thread.sleep(5);
+      Thread.sleep(5,999);
     } catch (InterruptedException e) {
       e.printStackTrace();
     } finally {
       TimeMeasurement.stop(etmPoint);
       assertTrue(TimeMeasurement.getMeasurementResults().contains("testUseMillis"));
-      assertTrue(TimeMeasurement.getMeasurementResults().contains("5"));
+      assertTrue(TimeMeasurement.getMeasurementResults().contains("6"));
       TimeMeasurement.toLog();
     }
   }

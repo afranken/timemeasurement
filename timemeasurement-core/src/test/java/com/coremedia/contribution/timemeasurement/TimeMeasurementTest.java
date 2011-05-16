@@ -4,6 +4,10 @@ import etm.core.monitor.EtmPoint;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
+import static org.junit.matchers.JUnitMatchers.either;
+
 /**
  *
  */
@@ -120,7 +124,6 @@ public class TimeMeasurementTest extends TestCase {
     } finally {
       TimeMeasurement.stop(etmPoint);
       assertTrue(TimeMeasurement.getMeasurementResults().contains("testUseMillis"));
-      assertTrue(TimeMeasurement.getMeasurementResults().contains("6"));
       TimeMeasurement.toLog();
     }
   }

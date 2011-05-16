@@ -4,7 +4,7 @@
   <groupId>com.coremedia.contribution.timemeasurement</groupId>
   <artifactId>timemeasurement</artifactId>
   <packaging>pom</packaging>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
 
   <name>TimeMeasurement</name>
   <description>A wrapper for the JETM time measurement library</description>
@@ -40,11 +40,11 @@
   </licenses>
 
   <scm>
-    <connection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/tags/timemeasurement-1.4
+    <connection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/trunk
     </connection>
-    <developerConnection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/tags/timemeasurement-1.4
+    <developerConnection>scm:svn:https://contributions.coremedia.com/svn-shared/timemeasurement/trunk
     </developerConnection>
-    <url>https://contributions.coremedia.com/svn-shared/timemeasurement/tags/timemeasurement-1.4</url>
+    <url>https://contributions.coremedia.com/svn-shared/timemeasurement/trunk</url>
   </scm>
 
   <modules>

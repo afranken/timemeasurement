@@ -93,7 +93,7 @@ public final class TimeMeasurement implements TimeMeasurementMBean {
   }
 
   /**
-   * Print formatted measurement information to StandardOut
+   * Print formatted measurement information to Log
    */
   public static void toLog() {
     measurement.toLog();

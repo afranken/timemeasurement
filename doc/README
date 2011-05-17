@@ -18,15 +18,26 @@
 
 == WHAT IT IS ==
 
-!TimeMeasurement is an easy to use wrapper for the JETM !TimeMeasurement library.
+Using !TimeMeasurement, you can easily measure the performance of your code.
+It integrates into every Java application, not just applications based on !CoreMedia software.
+Dependencies are kept to a minimum, only the JETM library is needed.
 
-The measurement is only invoked if the Java !SystemProperty {{{timemeasurement.enabled=true}}} is set, otherwise all
-measurement points in the code are ignored.
+You can measure your code performance by either
+ * Manually putting measurement points into your code
+ * Using AspectJ
+ * Using Spring AOP
+
+!TimeMeasurement wraps the JETM !TimeMeasurement library which automatically aggregates results, detects nested calls and calculates min, max and average values.
+
+Results can be accessed using JMX MBeans, or using static Java methods from your code.
+
+Finally, the measurement is only invoked if the Java !SystemProperty {{{timemeasurement.enabled=true}}} is set, otherwise all
+measurement points in the code are ignored. It should be safe to leave the measurement points in your production code.
 
 == CHANGELOG ==
 
 '''New with version 1.4''':
- * TimeMeasurement can write results to the application's logfile using {{{TimeMeasurement.toLog()}}}. The method is also available via MBean.
+ * TimeMeasurement can write results to the application's logfile using {{{TimeMeasurement.toLog()}}}. The method can also be triggered via MBean.
  * MBeans are now registered at all available MBean servers.
  * Measuring of nested methods can be displayed as such. Set !SystemProperty {{{timemeasurement.useMillis=true}}} to use:
  {{{
@@ -53,7 +64,7 @@ measurement points in the code are ignored.
 == HOW IT WORKS ==
 
 !TimeMeasurement provides static wrapper methods that delegate to the JETM !TimeMeasurement library if the system property is set to true.
-!TimeMeasurement also registers two MBeans which provide easy access to the class itself (to stop measurement) and to the measurement results.
+!TimeMeasurement also registers two MBeans which provide easy access to the class itself (to start/stop/reset measurement) and to the measurement results.
 
 This example code shows how to use the class:
 
@@ -72,7 +83,7 @@ This example code shows how to use the class:
 
 '''Remember to always stop the !EtmPoint in a finally block. If an exception occurs in your code, the point will probably never be stopped otherwise.'''
 
-As a convenience, the !TimeMeasurement class provides two ways to get the measurement results without using JMX:
+As a convenience, the !TimeMeasurement class provides three ways to get the measurement results without using JMX:
 
  * {{{TimeMeasurement.toStdOut()}}}
    * prints the formatted results to !StdOut.
@@ -81,7 +92,7 @@ As a convenience, the !TimeMeasurement class provides two ways to get the measur
    * returns the formatted results as a String.
 
  * {{{TimeMeasurement.toLog()}}}
-   * logs the formatted results. Using JETM log implementation guessing. Works with Log4j and java.util.logging. Uses !StdOut as a fallback.
+   * logs the formatted results. Using JETM log implementation guessing. Works with Log4j and java.util.logging. Uses !StdOut as a fallback. The method can also be triggered via MBean.
 
 
 == ASPECTJ ==

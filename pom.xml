@@ -58,7 +58,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <aspectj.version>1.6.7</aspectj.version>
+    <aspectj.version>1.8.2</aspectj.version>
   </properties>
 
   <build>
@@ -68,8 +68,8 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
-            <source>1.6</source>
-            <target>1.6</target>
+            <source>1.7</source>
+            <target>1.7</target>
             <encoding>UTF-8</encoding>
           </configuration>
         </plugin>
@@ -77,9 +77,9 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>aspectj-maven-plugin</artifactId>
           <configuration>
-            <complianceLevel>1.6</complianceLevel>
-            <source>1.6</source>
-            <target>1.6</target>
+            <complianceLevel>1.7</complianceLevel>
+            <source>1.7</source>
+            <target>1.7</target>
             <encoding>UTF-8</encoding>
           </configuration>
           <dependencies>
@@ -112,12 +112,6 @@
         <version>1.2.3</version>
       </dependency>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.4</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>org.aspectj</groupId>
         <artifactId>aspectjrt</artifactId>
         <version>${aspectj.version}</version>
@@ -145,17 +139,21 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-all</artifactId>
-        <version>1.8.5</version>
+        <version>1.10.19</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>java-hamcrest</artifactId>
+        <version>2.0.0.0</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <repositories>
-    <repository>
-      <id>coremedia.com</id>
-      <name>CMS Releases</name>
-      <url>https://repository.coremedia.com/nexus/content/repositories/cms-releases/</url>
-    </repository>
-  </repositories>
-
+  
 </project>

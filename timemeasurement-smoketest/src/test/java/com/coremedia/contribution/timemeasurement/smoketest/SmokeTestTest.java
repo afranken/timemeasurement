@@ -4,7 +4,7 @@ import com.coremedia.contribution.timemeasurement.TimeMeasurement;
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SmokeTestTest {
   @Test
@@ -14,10 +14,11 @@ public class SmokeTestTest {
     consumeTime();
 
     TimeMeasurement.toStdOut();
-    assertTrue(TimeMeasurement.getMeasurementResults().contains("consumeTime"));
+    assertThat("Measurement Pont was not executed.",
+            TimeMeasurement.getMeasurementResults().contains("SmokeTestTest#consumeTime"));
   }
 
-  @Measure("consumeTime")
+  @Measure
   public void consumeTime() {
     try {
       Thread.sleep(100);

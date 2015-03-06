@@ -20,5 +20,5 @@ public @interface Measure {
   /**
    * Name of the measurement point
    */
-  String value() default "default";
+  String value() default "";
 }

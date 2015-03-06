@@ -8,18 +8,17 @@ import java.lang.annotation.Target;
 /**
  * This annotation marks, that the annotated method should
  * be measured.
- *
+ * <p/>
  * <p> In order to measure the method, the annotated
  * bytecode must be weaved with the aspect
- * {@link com.coremedia.contribution.timemeasurement.aspect.MeasureForAspect}.
+ * {@link com.coremedia.contribution.timemeasurement.aspect.MeasureAspect}.
  * </p>
- * @author afranken (c) 2010
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = ElementType.METHOD)
 public @interface Measure {
-	/**
-	 *  Name of the measurement point
-	 */
-	String value() default "default";
+  /**
+   * Name of the measurement point
+   */
+  String value() default "default";
 }

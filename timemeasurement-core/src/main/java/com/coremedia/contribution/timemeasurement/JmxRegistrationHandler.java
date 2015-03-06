@@ -1,14 +1,23 @@
 package com.coremedia.contribution.timemeasurement;
 
-import etm.core.configuration.EtmManager;
 import etm.core.jmx.EtmMonitorMBean;
 import etm.core.util.Log;
 import etm.core.util.LogAdapter;
 
-import javax.management.*;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.InstanceNotFoundException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MBeanServerFactory;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
 import javax.management.openmbean.OpenDataException;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
+
+import static com.coremedia.contribution.timemeasurement.TimeMeasurement.getMBean;
+import static etm.core.configuration.EtmManager.getEtmMonitor;
 
 /**
  * Helper that registers and unregisters the MBeans at the JMXProvider.
@@ -31,8 +40,8 @@ public final class JmxRegistrationHandler {
    */
   static {
     try {
-      timeMeasurementName = new ObjectName("TimeMeasurement:service=TimeMeasurement");
-      monitorName = new ObjectName("TimeMeasurement:service=PerformanceMonitor");
+      timeMeasurementName = new ObjectName("TimeMeasurement:type=TimeMeasurement");
+      monitorName = new ObjectName("TimeMeasurement:type=PerformanceMonitor");
     } catch (MalformedObjectNameException e) {
       LOG.error("Could not create MBean ObjectNames. ", e);
     }
@@ -47,7 +56,7 @@ public final class JmxRegistrationHandler {
       ArrayList<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
 
       for (MBeanServer mBeanServer : mBeanServers) {
-        mBeanServer.registerMBean(com.coremedia.contribution.timemeasurement.TimeMeasurement.getMBean(), timeMeasurementName);
+        mBeanServer.registerMBean(getMBean(), timeMeasurementName);
       }
 
     } catch (NotCompliantMBeanException e) {
@@ -70,7 +79,7 @@ public final class JmxRegistrationHandler {
       ArrayList<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
 
       for (MBeanServer mBeanServer : mBeanServers) {
-        mBeanServer.registerMBean(new EtmMonitorMBean(EtmManager.getEtmMonitor(), "TimeMeasurement"), monitorName);
+        mBeanServer.registerMBean(new EtmMonitorMBean(getEtmMonitor(), "TimeMeasurement"), monitorName);
       }
     } catch (OpenDataException e) {
       LOG.warn("There was a problem opening the EtmMonitorMBean.", e);

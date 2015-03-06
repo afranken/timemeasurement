@@ -6,29 +6,23 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class SmokeTestTest
-{
-	@Test
-	public void testTest()
-	{
-		System.setProperty("timemeasurement.enabled","true");
+public class SmokeTestTest {
+  @Test
+  public void testTest() {
+    System.setProperty("timemeasurement.enabled", "true");
 
-		consumeTime();
+    consumeTime();
 
-		TimeMeasurement.toStdOut();
-		assertTrue(TimeMeasurement.getMeasurementResults().contains("consumeTime"));
-	}
+    TimeMeasurement.toStdOut();
+    assertTrue(TimeMeasurement.getMeasurementResults().contains("consumeTime"));
+  }
 
-	@Measure("consumeTime")
-	public void consumeTime()
-	{
-		try
-		{
-			Thread.sleep(100);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-	}
+  @Measure("consumeTime")
+  public void consumeTime() {
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 }

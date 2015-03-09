@@ -32,7 +32,7 @@ public class TimeMeasurementAspect {
 
     EtmPoint etmPoint = null;
     try {
-      etmPoint = TimeMeasurement.start(String.format("%1$s.%2$s(..)", call.getTarget().getClass().getName(), call.getSignature().getName()));
+      etmPoint = TimeMeasurement.start(String.format("%1$s#%2$s(..)", call.getTarget().getClass().getName(), call.getSignature().getName()));
       return call.proceed();
     } finally {
       TimeMeasurement.stop(etmPoint);

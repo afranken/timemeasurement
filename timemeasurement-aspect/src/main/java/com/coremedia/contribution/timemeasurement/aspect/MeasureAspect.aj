@@ -15,7 +15,7 @@ public aspect MeasureAspect {
     // 1 -- get measurement id
     String measureId = measure.value();
     if(measureId.isEmpty()) {
-      measureId = thisJoinPoint.getTarget().getClass().getSimpleName() + "#" + thisJoinPoint.getSignature().getName();
+      measureId = String.format("%1$s#%2$s", thisJoinPoint.getTarget().getClass().getSimpleName(), thisJoinPoint.getSignature().getName());
     }
 
     // 2 -- measure and execute method

@@ -1,4 +1,4 @@
-package com.coremedia.contribution.timemeasurement;
+package com.coremedia.contribution.timemeasurement.monitoring;
 
 import etm.core.jmx.EtmMonitorMBean;
 import etm.core.util.Log;

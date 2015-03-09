@@ -1,11 +1,11 @@
-package com.coremedia.contribution.timemeasurement;
+package com.coremedia.contribution.timemeasurement.connector;
 
 import etm.core.monitor.EtmPoint;
 
 /**
- * Dummy connector, calling this from production code should have only minimal impact.
+ * Non-operational connector, calling this from production code has only minimal impact.
  */
-public class DummyJetmConnector implements JetmConnector {
+public class NoopJetmConnector implements JetmConnector {
 
   @Override
   public EtmPoint start(final String pointName) {

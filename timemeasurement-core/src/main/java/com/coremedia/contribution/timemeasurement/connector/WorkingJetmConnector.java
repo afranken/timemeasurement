@@ -1,5 +1,6 @@
-package com.coremedia.contribution.timemeasurement;
+package com.coremedia.contribution.timemeasurement.connector;
 
+import com.coremedia.contribution.timemeasurement.TimeMeasurement;
 import etm.core.configuration.EtmManager;
 import etm.core.monitor.EtmPoint;
 import etm.core.renderer.SimpleTextRenderer;

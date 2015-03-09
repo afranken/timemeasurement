@@ -1,4 +1,4 @@
-package com.coremedia.contribution.timemeasurement;
+package com.coremedia.contribution.timemeasurement.connector;
 
 import etm.core.monitor.EtmPoint;
 

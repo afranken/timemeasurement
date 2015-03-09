@@ -1,5 +1,10 @@
 package com.coremedia.contribution.timemeasurement;
 
+import com.coremedia.contribution.timemeasurement.connector.NoopJetmConnector;
+import com.coremedia.contribution.timemeasurement.connector.JetmConnector;
+import com.coremedia.contribution.timemeasurement.connector.WorkingJetmConnector;
+import com.coremedia.contribution.timemeasurement.monitoring.JmxRegistrationHandler;
+import com.coremedia.contribution.timemeasurement.monitoring.TimeMeasurementMBean;
 import etm.core.configuration.BasicEtmConfigurator;
 import etm.core.configuration.EtmManager;
 import etm.core.monitor.EtmPoint;
@@ -215,7 +220,7 @@ public final class TimeMeasurement implements TimeMeasurementMBean {
         JmxRegistrationHandler.unregisterEtmMonitorMBean();
         performanceMBeanCreated = false;
       }
-      measurement = new DummyJetmConnector();
+      measurement = new NoopJetmConnector();
     }
   }
 

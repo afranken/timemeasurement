@@ -6,17 +6,21 @@ import org.aspectj.lang.Signature;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class TimeMeasurementAspectTest {
 
   @Test
   public void testProceed() throws Throwable {
-    ProceedingJoinPoint joinPoint = Mockito.mock(ProceedingJoinPoint.class);
-    Mockito.when(joinPoint.getTarget()).thenReturn("");
-    Signature signature = Mockito.mock(Signature.class);
-    Mockito.when(signature.getName()).thenReturn("testTheBest");
-    Mockito.when(joinPoint.getSignature()).thenReturn(signature);
+    ProceedingJoinPoint joinPoint = mock(ProceedingJoinPoint.class);
+    when(joinPoint.getTarget()).thenReturn("");
+    Signature signature = mock(Signature.class);
+    when(signature.getName()).thenReturn("testTheBest");
+    when(joinPoint.getSignature()).thenReturn(signature);
     System.setProperty("timemeasurement.enabled", "true");
 
     TimeMeasurementAspect aspect = new TimeMeasurementAspect();
@@ -24,8 +28,9 @@ public class TimeMeasurementAspectTest {
     aspect.profile(joinPoint);
 
     // verify that proceed was called on the joinPoint
-    Mockito.verify(joinPoint).proceed();
+    verify(joinPoint).proceed();
 
-    assertTrue(TimeMeasurement.getMeasurementResults().contains("java.lang.String.testTheBest(..)"));
+    assertThat("Measurement point was not called.",
+            TimeMeasurement.getMeasurementResults().contains("String#testTheBest(..)"));
   }
 }

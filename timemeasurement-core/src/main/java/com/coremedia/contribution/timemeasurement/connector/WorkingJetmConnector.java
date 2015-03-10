@@ -39,7 +39,7 @@ public class WorkingJetmConnector implements JetmConnector {
 
   @Override
   public void toStdOut() {
-    if (TimeMeasurement.isUseMillisEnabled()) {
+    if (TimeMeasurement.getInstance().isUseMillis()) {
       EtmManager.getEtmMonitor().render(new SimpleTextRenderer(NumberFormat.getNumberInstance()));
     } else {
       EtmManager.getEtmMonitor().render(new SimpleTextRenderer());
@@ -49,7 +49,7 @@ public class WorkingJetmConnector implements JetmConnector {
   @Override
   public String getMeasurementResults() {
     StringWriter writer = new StringWriter();
-    if (TimeMeasurement.isUseMillisEnabled()) {
+    if (TimeMeasurement.getInstance().isUseMillis()) {
       EtmManager.getEtmMonitor().render(new SimpleTextRenderer(writer, NumberFormat.getNumberInstance()));
     } else {
       EtmManager.getEtmMonitor().render(new SimpleTextRenderer(writer));

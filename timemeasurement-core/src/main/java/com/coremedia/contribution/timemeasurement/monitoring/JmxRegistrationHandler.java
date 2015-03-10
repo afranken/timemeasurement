@@ -13,17 +13,16 @@ import javax.management.MalformedObjectNameException;
 import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 import javax.management.openmbean.OpenDataException;
-import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 
-import static com.coremedia.contribution.timemeasurement.TimeMeasurement.getMBean;
+import static com.coremedia.contribution.timemeasurement.TimeMeasurement.getInstance;
 import static etm.core.configuration.EtmManager.getEtmMonitor;
 
 /**
  * Helper that registers and unregisters the MBeans at the JMXProvider.
  */
 public final class JmxRegistrationHandler {
-  private static MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+  private static ArrayList<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
   private static ObjectName timeMeasurementName;
   private static ObjectName monitorName;
   private static LogAdapter LOG = Log.getLog(JmxRegistrationHandler.class);
@@ -53,10 +52,8 @@ public final class JmxRegistrationHandler {
   public static void registerTimeMeasurementMBean() {
 
     try {
-      ArrayList<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
-
       for (MBeanServer mBeanServer : mBeanServers) {
-        mBeanServer.registerMBean(getMBean(), timeMeasurementName);
+        mBeanServer.registerMBean(getInstance(), timeMeasurementName);
       }
 
     } catch (NotCompliantMBeanException e) {
@@ -76,8 +73,6 @@ public final class JmxRegistrationHandler {
   public static void registerEtmMonitorMBean() {
 
     try {
-      ArrayList<MBeanServer> mBeanServers = MBeanServerFactory.findMBeanServer(null);
-
       for (MBeanServer mBeanServer : mBeanServers) {
         mBeanServer.registerMBean(new EtmMonitorMBean(getEtmMonitor(), "TimeMeasurement"), monitorName);
       }
@@ -98,7 +93,7 @@ public final class JmxRegistrationHandler {
   public static void unregisterEtmMonitorMBean() {
 
     try {
-      if (mBeanServer != null) {
+      for (MBeanServer mBeanServer : mBeanServers) {
         mBeanServer.unregisterMBean(monitorName);
       }
     } catch (MBeanRegistrationException e) {

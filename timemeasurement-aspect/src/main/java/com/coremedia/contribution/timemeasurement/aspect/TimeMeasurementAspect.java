@@ -1,7 +1,7 @@
 package com.coremedia.contribution.timemeasurement.aspect;
 
+import com.coremedia.contribution.timemeasurement.MeasurementResource;
 import com.coremedia.contribution.timemeasurement.TimeMeasurement;
-import etm.core.monitor.EtmPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -30,16 +30,12 @@ public class TimeMeasurementAspect {
 
   public Object profile(ProceedingJoinPoint call) throws Throwable {
 
-    EtmPoint etmPoint = null;
-    try {
-      etmPoint = TimeMeasurement.start(
-              String.format("%1$s#%2$s(..)", 
-                      call.getTarget().getClass().getSimpleName(), 
-                      call.getSignature().getName())
-      );
+    String measureId = String.format("%1$s#%2$s(..)",
+            call.getTarget().getClass().getSimpleName(),
+            call.getSignature().getName());
+
+    try (MeasurementResource ignored = TimeMeasurement.start(measureId)) {
       return call.proceed();
-    } finally {
-      TimeMeasurement.stop(etmPoint);
     }
   }
 }

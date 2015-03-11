@@ -1,5 +1,6 @@
 package com.coremedia.contribution.timemeasurement.aspect;
 
+import com.coremedia.contribution.timemeasurement.MeasurementResource;
 import com.coremedia.contribution.timemeasurement.TimeMeasurement;
 import com.coremedia.contribution.timemeasurement.annotation.Measure;
 import etm.core.monitor.EtmPoint;
@@ -14,9 +15,9 @@ public aspect MeasureAspect {
   Object around(Measure measure): hasMeasureAnnotation(measure) {
     // 1 -- get measurement id
     String measureId = measure.value();
-    if(measureId.isEmpty()) {
-      measureId = String.format("%1$s#%2$s", 
-              thisJoinPoint.getTarget().getClass().getSimpleName(), 
+    if (measureId.isEmpty()) {
+      measureId = String.format("%1$s#%2$s",
+              thisJoinPoint.getTarget().getClass().getSimpleName(),
               thisJoinPoint.getSignature().getName()
       );
     }
@@ -24,10 +25,10 @@ public aspect MeasureAspect {
     // 2 -- measure and execute method
     EtmPoint etmPoint = null;
     try {
-      etmPoint = TimeMeasurement.start(measureId);
+      etmPoint = TimeMeasurement.start(measureId).getPoint();
       return proceed(measure);
     } finally {
-      TimeMeasurement.stop(etmPoint);
+      etmPoint.collect();
     }
   }
 }

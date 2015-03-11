@@ -76,8 +76,8 @@ public final class TimeMeasurement implements TimeMeasurementMBean {
    * @param pointName name of the measurement point to create
    * @return measurement point
    */
-  public static EtmPoint start(final String pointName) {
-    return measurement.start(pointName);
+  public static MeasurementResource start(final String pointName) {
+    return new MeasurementResourceImpl(measurement.start(pointName));
   }
 
   /**
@@ -85,8 +85,10 @@ public final class TimeMeasurement implements TimeMeasurementMBean {
    *
    * @param point the measurement point to stop
    */
-  public static void stop(final EtmPoint point) {
-    measurement.stop(point);
+  public static void stop(final MeasurementResource point) throws Exception {
+    if (point != null) {
+      point.close();
+    }
   }
 
   /**
